@@ -2,35 +2,37 @@ const express = require('express')
 
 const router = express.Router()
 
-const Subscriber = require('../models/subscriber')
+const Aluno = require('../models/aluno')
 
 // GET all
 router.get('/', async (req, res) => {
     try {
-        const subscribers = await Subscriber.find()
+        const alunos = await Aluno.find()
 
-        return res.send(subscribers)
+        return res.send(alunos)
     }catch (err) {
         res.status(500).json({message: err.message})
     }
 })
 
 // GET by ID
-router.get('/:id', getSubscriber, async (req, res) => {
+router.get('/:id', getAluno, async (req, res) => {
 
-    res.json(res.subscriber)
+    res.json(res.aluno)
 })
 
 // POST create
 router.post('/', async (req, res) => {
 
-    const subscriber = new Subscriber({
-        name: req.body.name,
-        channel: req.body.channel
+    const subscriber = new Aluno({
+        matricula: req.body.matricula
+        anoSemestreDeEntrada: req.body.anoSemestreDeEntrada
+        nomeCompleto: req.body.nomeCompleto
+        Curso: req.body.Curso
     })
 
     try {
-        const created = await subscriber.save()
+        const created = await aluno.save()
 
         res.status(201).json(created)
     }catch (err) {
@@ -39,17 +41,25 @@ router.post('/', async (req, res) => {
 })
 
 // PATCH update
-router.patch('/:id', getSubscriber, async (req, res) => {
-    if (req.body.name != null) {
-        res.subscriber.name = req.body.name
+router.patch('/:id', getAluno, async (req, res) => {
+    if (req.body.matricula != null) {
+        res.aluno.matricula = req.body.matricula
     }
-
-    if (req.body.channel != null) {
-        res.subscriber.channel = req.body.channel
+    
+    if (req.body.anoSemestreDeEntrada != null) {
+        res.aluno.anoSemestreDeEntrada = req.body.anoSemestreDeEntrada
+    }
+    
+    if (req.body.nomeCompleto != null) {
+        res.aluno.nomeCompleto = req.body.nomeCompleto
+    }
+    
+    if (req.body.Curso != null) {
+        res.aluno.Curso = req.body.Curso
     }
 
     try {
-        const updated = await res.subscriber.save()
+        const updated = await res.aluno.save()
 
         res.json(updated)
     }catch (err) {
@@ -58,10 +68,10 @@ router.patch('/:id', getSubscriber, async (req, res) => {
 })
 
 // DELETE remove
-router.delete('/:id', getSubscriber, async (req, res) => {
+router.delete('/:id', getAluno, async (req, res) => {
 
     try {
-        await res.subscriber.remove()
+        await res.aluno.remove()
 
         res.json({message: 'Deleted Successfully'})
     } catch (err) {
@@ -70,18 +80,18 @@ router.delete('/:id', getSubscriber, async (req, res) => {
 })
 
 // middleware
-async function getSubscriber(req, res, next) {
+async function getAluno(req, res, next) {
     try {
-        subscriber = await Subscriber.findById(req.params.id)
+        aluno = await Aluno.findById(req.params.id)
 
-        if (subscriber == null) {
-            return res.status(404).json({message: 'Subscriber not found'})
+        if (aluno == null) {
+            return res.status(404).json({message: 'Aluno not found'})
         }
     }catch (err) {
         res.status(500).json({message: err.message})
     }
 
-    res.subscriber = subscriber
+    res.aluno = aluno
 
     next()
 }
