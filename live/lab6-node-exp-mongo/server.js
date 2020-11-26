@@ -29,5 +29,11 @@ app.use(express.json())
 const subscribersRouter = require('./routes/subscribers')
 app.use('/v1/subscribers', subscribersRouter)
 
+const cursosRouter = require('./routes/cursos')
+app.use('/v1/cursos', cursosRouter)
+
+const alunosRouter = require('./routes/alunos')
+app.use('/v1/alunos', alunosRouter)
+
 
 app.listen(3000, () => console.log('Server started.'))
