@@ -25,9 +25,9 @@ router.get('/:id', getAluno, async (req, res) => {
 router.post('/', async (req, res) => {
 
     const subscriber = new Aluno({
-        matricula: req.body.matricula
-        anoSemestreDeEntrada: req.body.anoSemestreDeEntrada
-        nomeCompleto: req.body.nomeCompleto
+        matricula: req.body.matricula,
+        anoSemestreDeEntrada: req.body.anoSemestreDeEntrada,
+        nomeCompleto: req.body.nomeCompleto,
         Curso: req.body.Curso
     })
 
