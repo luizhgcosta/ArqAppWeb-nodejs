@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 // definição do esquema
-const alunosSchema = new mongoose.Schema({
+const alunoSchema = new mongoose.Schema({
     id : {
         type: String,
         required: true
@@ -35,4 +35,4 @@ const alunosSchema = new mongoose.Schema({
 })
 
 // configurando o esquema no banco
-module.exports = mongoose.model('Alunos', alunosSchema)
+module.exports = mongoose.model('Aluno', alunoSchema)
