@@ -1,16 +1,33 @@
 const mongoose = require('mongoose')
 
 // definição do esquema
-const subscriberSchema = new mongoose.Schema({
-    name : {
+const alunosSchema = new mongoose.Schema({
+    id : {
         type: String,
         required: true
     },
-    channel: {
+    matricula: {
         type: String,
         required: true
     },
-    subscribedDate: {
+    anoSemestreDeEntrada: {
+        type: String,
+        required: true
+    },
+    nomeCompleto: {
+        type: String,
+        required: true
+    },
+    Curso: {
+        type: String,
+        required: true
+    },
+    criadoEm: {
+        type: Date,
+        required: true,
+        default: Date.now
+    }
+    atualizadoEm: {
         type: Date,
         required: true,
         default: Date.now
@@ -18,4 +35,4 @@ const subscriberSchema = new mongoose.Schema({
 })
 
 // configurando o esquema no banco
-module.exports = mongoose.model('Subscriber', subscriberSchema)
+module.exports = mongoose.model('Alunos', alunosSchema)
